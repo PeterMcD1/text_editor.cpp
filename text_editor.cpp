@@ -37,9 +37,13 @@ void read_file(std::string filename){
     std::ifstream in(filename);
     if (in.is_open()){
         std::string filecontents;
+        std::cout << std::endl;
+        int i = 1;
         while(std::getline(in, filecontents)){
-            std::cout << filecontents << std::endl;
+            std::cout << i << ". " << filecontents << std::endl;
+            i++;
         }
+        std::cout << std::endl;
     }
     return;
 }
