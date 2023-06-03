@@ -90,31 +90,38 @@ void edit_file(std::string filename){
 }
 
 int main(){
-    std::cout << "Enter your option: \n";
-    std::cout << "1. read file\n";
-    std::cout << "2. input text to new file\n";
-    std::cout << "3. edit file\n";
-    int option = get_option();
-    switch(option){
-        case 1: {
-            std::string filename;
-            std::cout << "What file do you want to read?\n";
-            std::getline(std::cin, filename);
-            read_file(filename);
-            break;
-        }
-        case 2: {
-            std::string user_input;
-            user_input = get_user_input();
-            save_user_input(user_input);
-            break;
-        }
-        case 3: {
-            std::string filename;
-            std::cout << "What file do you want to edit?\n";
-            std::getline(std::cin, filename);
-            edit_file(filename);
-            break;
+    while(true){
+        std::cout << "Enter your option: \n";
+        std::cout << "1. read file\n";
+        std::cout << "2. input text to new file\n";
+        std::cout << "3. edit file\n";
+        std::cout << "0. to exit\n";
+        int option = get_option();
+        switch(option){
+            case 0: { return 0; }
+            case 1: {
+                std::string filename;
+                std::cout << "What file do you want to read?\n";
+                std::getline(std::cin, filename);
+                read_file(filename);
+                break;
+            }
+            case 2: {
+                std::string user_input;
+                user_input = get_user_input();
+                save_user_input(user_input);
+                break;
+            }
+            case 3: {
+                std::string filename;
+                std::cout << "What file do you want to edit?\n";
+                std::getline(std::cin, filename);
+                edit_file(filename);
+                break;
+            }
+            default: {
+                std::cout << "ERROR: give a valid option\n\n";
+            }
         }
     }
     return 0;
