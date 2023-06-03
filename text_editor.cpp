@@ -44,30 +44,26 @@ void read_file(std::string filename){
     return;
 }
 
+// function to replace a specific line with a new line from user input
 void replace_line(std::string filename, int linenumber, std::string newtext){
     std::fstream in(filename);
     std::vector<std::string> lines;
     std::string line;
-    while(getline(in, line)){
-        lines.push_back(line);
-    }
+    while(getline(in, line)) lines.push_back(line);
     in.close();
 
     if(linenumber >= lines.size()){
-        std::cout << "Line " << linenumber;
-        std::cout << " not in file. \n";
+        std::cout << "Line " << linenumber << " not in file. \n";
         return;
     }
 
     std::ofstream out(filename);
 
     for (int i = 0; i< lines.size(); i++){
-        if (i != linenumber){
+        if (i != linenumber)
             out << lines[i] << std::endl;
-        }
-        else{
+        else
             out << newtext << std::endl;
-        }
     }
     out.close();
 }
@@ -82,6 +78,7 @@ void edit_file(std::string filename){
         case 1: {
             std::cout << "what line do you want to replace?(numerical): ";
             int linenumber = get_option();
+            linenumber--;
             std::cout << "what text do you want to replace this line?\n";
             std::string newtext;
             std::getline(std::cin, newtext);
