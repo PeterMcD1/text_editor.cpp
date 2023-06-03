@@ -77,6 +77,7 @@ void edit_file(std::string filename){
     read_file(filename);
     std::cout << "What do you want to do?\n";
     std::cout << "1. replace a line\n";
+    std::cout << "2. add a new line\n";
     int option = get_option();
     switch(option){
         case 1: {
@@ -87,6 +88,17 @@ void edit_file(std::string filename){
             std::string newtext;
             std::getline(std::cin, newtext);
             replace_line(filename, linenumber, newtext);
+            break;
+        }
+        case 2: {
+            std::cout << "What should the text be for the new line\n";
+            std::string newtext;
+            std::getline(std::cin, newtext);
+            std::ofstream out;
+            out.open(filename, std::ios_base::app);
+            out << newtext;
+            out.close();
+            break;
         }
     }
 }
