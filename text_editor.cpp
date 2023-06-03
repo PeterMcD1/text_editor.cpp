@@ -135,12 +135,30 @@ void edit_file(std::string filename){
     }
 }
 
+void search_text(std::string filename, std::string text){
+    std::ifstream in(filename);
+    if (in.is_open()){
+        std::string filecontents;
+        std::cout << std::endl;
+        int i = 1;
+        while(std::getline(in, filecontents)){
+            if (filecontents.find(text) != std::string::npos){
+                std::cout << i << ". " << filecontents << std::endl;
+            }
+            i++;
+        }
+        std::cout << std::endl;
+    }
+    return;
+}
+
 int main(){
     while(true){
         std::cout << "Enter your option: \n";
         std::cout << "1. read file\n";
         std::cout << "2. input text to new file\n";
         std::cout << "3. edit file\n";
+        std::cout << "4. search text\n";
         std::cout << "0. to exit\n";
         int option = get_option();
         switch(option){
@@ -163,6 +181,16 @@ int main(){
                 std::cout << "What file do you want to edit?\n";
                 std::getline(std::cin, filename);
                 edit_file(filename);
+                break;
+            }
+            case 4: {
+                std::string filename;
+                std::cout << "What file do you want to search?\n";
+                std::getline(std::cin, filename);
+                std::cout << "What text do you want to search for?\n";
+                std::string text;
+                std::getline(std::cin, text);
+                search_text(filename, text);
                 break;
             }
             default: {
