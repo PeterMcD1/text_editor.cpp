@@ -49,7 +49,7 @@ void read_file(std::string filename){
 }
 
 // function to replace a specific line with a new line from user input
-void replace_line(std::string filename, int linenumber, std::string newtext){
+void replace_line(std::string filename, size_t linenumber, std::string newtext){
     std::fstream in(filename);
     std::vector<std::string> lines;
     std::string line;
@@ -63,7 +63,7 @@ void replace_line(std::string filename, int linenumber, std::string newtext){
 
     std::ofstream out(filename);
 
-    for (int i = 0; i< lines.size(); i++){
+    for (size_t i = 0; i < lines.size(); i++){
         if (i != linenumber)
             out << lines[i] << std::endl;
         else
