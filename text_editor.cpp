@@ -72,12 +72,37 @@ void replace_line(std::string filename, size_t linenumber, std::string newtext){
     out.close();
 }
 
+// function to delete a specific line
+void delete_line(std::string filename, size_t linenumber){
+    std::fstream in(filename);
+    std::vector<std::string> lines;
+    std::string line;
+    while(getline(in, line)) lines.push_back(line);
+    in.close();
+
+    if(linenumber >= lines.size()){
+        std::cout << "Line " << linenumber << " not in file. \n";
+        return;
+    }
+
+    std::ofstream out(filename);
+    for (size_t i = 0; i < lines.size(); i++){
+        if (i == linenumber)
+            continue;
+        else 
+            out << lines[i] << std::endl;
+    }
+    out.close();
+
+}
+
 //function to edit file contents
 void edit_file(std::string filename){
     read_file(filename);
     std::cout << "What do you want to do?\n";
     std::cout << "1. replace a line\n";
     std::cout << "2. add a new line\n";
+    std::cout << "3. delete a line\n";
     int option = get_option();
     switch(option){
         case 1: {
@@ -98,6 +123,13 @@ void edit_file(std::string filename){
             out.open(filename, std::ios_base::app);
             out << newtext;
             out.close();
+            break;
+        }
+        case 3: {
+            std::cout << "What line do you want to delete?(numerical): ";
+            int linenumber = get_option();
+            linenumber--;
+            delete_line(filename, linenumber);
             break;
         }
     }
